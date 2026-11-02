@@ -7,11 +7,13 @@ print(f"{nome} ha un importo di {importo:.2f} euro ed è attivo: {attivo}")
 
 importi: list[float] = [1250.50, 980.00, 1750.25, 430.75, 2100.00]
 
-print(f"la lista contiene {len(importi)} importi")
+print(f"la lista contiene {len(importi)} importi") #f-string
 print(f"il primo importo è {importi[0]:.2f} euro")
 print(f"l'ultimo importo è {importi[-1]:.2f} euro")
 print(f"la somma degli importi è {sum(importi):.2f} euro")
 
+
+#dizionario
 cliente = {
     "id": 1,
     "nome": "Mario Rossi",
@@ -21,6 +23,6 @@ cliente = {
 cliente["email"] = "mario.rossi@example.com"
 
 print(f"Cliente: {cliente}")
-print(f"Telefono: {cliente.get('telefono', 'non disponibile')}")
+print(f"Telefono: {cliente.get('telefono', 'non disponibile')}") #come un nvl
 
 # print(cliente["telefono"]) # keyerror
