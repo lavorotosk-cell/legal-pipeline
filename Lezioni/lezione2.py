@@ -3,18 +3,19 @@ ordini: list[dict] = [
     {"id": 2, "cliente": "Bianchi", "importo": 980.00},
     {"id": 3, "cliente": "Verdi", "importo": None},
     {"id": 4, "cliente": "Neri", "importo": 2100.00},
-    ]
+]
 
 ordini.append({"id": 5, "cliente": "Gialli"})
 
 importi: list[float] = [1250.50, 980.00, 1750.25, 430.75, 2100.00]
 
+
 def classifica(importo: float) -> str:
-    if   importo > 2000: 
+    if importo > 2000:
         return "alta"
-    elif importo > 1000: 
+    elif importo > 1000:
         return "media"
-    else: 
+    else:
         return "bassa"
 
 
@@ -24,7 +25,6 @@ print(f"l'importo 1111 è {classifica(importo=1111)}")
 
 for pos, importo in enumerate(importi, start=1):
     print(f"importo {pos}: {importo:.2f} -> {classifica(importo)}")
-
 
 
 def elabora(ordini: list[dict]) -> tuple[list[dict], list[dict]]:
@@ -41,16 +41,15 @@ def elabora(ordini: list[dict]) -> tuple[list[dict], list[dict]]:
         if importo is None:
             ordini_scartati.append(ordine)
             continue
-# TRY e IF si possono sostituire con IF ordine.get("importo") is None
+        # TRY e IF si possono sostituire con IF ordine.get("importo") is None
         ordine["fascia"] = classifica(importo)
         ordini_validi.append(ordine)
 
-    return ordini_validi,ordini_scartati
+    return ordini_validi, ordini_scartati
+
 
 validi, scartati = elabora(ordini)
 
 print(f"Numero ordini validi: {len(validi)}")
 print(f"Numero ordini scartati: {len(scartati)}")
 print(f"Totale importi validi: {sum(o['importo'] for o in validi):.2f}")
-
-

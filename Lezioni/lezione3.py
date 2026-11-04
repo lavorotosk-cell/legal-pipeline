@@ -4,22 +4,25 @@ from pathlib import Path
 
 
 def classifica(importo: float) -> str:
-    if   importo > 2000: 
+    if importo > 2000:
         return "alta"
-    elif importo > 1000: 
+    elif importo > 1000:
         return "media"
-    else: 
+    else:
         return "bassa"
+
 
 def leggi_ordini(percorso: Path) -> list[dict]:
     with open(percorso, encoding="utf-8", newline="") as f:
         return list(csv.DictReader(f))
+
 
 def converti_importo(valore: str) -> float | None:
     try:
         return float(valore)
     except ValueError:
         return None
+
 
 def elabora_ordini(ordini: list[dict]) -> tuple[list[dict], list[dict]]:
     ordini_validi: list[dict] = []
@@ -31,23 +34,23 @@ def elabora_ordini(ordini: list[dict]) -> tuple[list[dict], list[dict]]:
             if importo is None:
                 ordini_scartati.append(ordine)
                 continue
-            ordine["importo"] = importo 
+            ordine["importo"] = importo
             ordine["fascia"] = classifica(importo)
             ordini_validi.append(ordine)
         except KeyError:
             ordini_scartati.append(ordine)
 
+    return ordini_validi, ordini_scartati
 
-    return ordini_validi,ordini_scartati
 
 def scrivi_json(dati: list[dict], percorso: Path) -> None:
-    percorso.parent.mkdir(parents=True, exist_ok=True) # crea le cartelle se mancano
+    percorso.parent.mkdir(parents=True, exist_ok=True)  # crea le cartelle se mancano
     with open(percorso, "w", encoding="utf-8") as f:
-        # ensure_ascii=False mantiene le lettere accentate leggibili 
+        # ensure_ascii=False mantiene le lettere accentate leggibili
         # e indent=2 rende il file ordinato.
-        json.dump(dati, f, ensure_ascii=False, indent=2) 
+        json.dump(dati, f, ensure_ascii=False, indent=2)
 
-    
+
 ordini = leggi_ordini(Path("samples") / "ordini.csv")
 validi, scartati = elabora_ordini(ordini)
 clienti_alta = [c["cliente"] for c in validi if c["fascia"] == "alta"]

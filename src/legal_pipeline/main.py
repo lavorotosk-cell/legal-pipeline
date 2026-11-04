@@ -5,6 +5,7 @@ from legal_pipeline.files import leggi_ordini, scrivi_json
 from legal_pipeline.transform import elabora_ordini
 
 logger = logging.getLogger(__name__)
+OUTPUT_DIR = Path("data") / "output"
 
 
 def main() -> None:
@@ -17,10 +18,10 @@ def main() -> None:
     validi, scartati = elabora_ordini(ordini)
     logger.info("ordini validi: %s", len(validi))
     logger.warning("ordini scartati: %s", len(scartati))
-    scrivi_json(validi, Path("data")  /Path("output") / "validi.json" )
-    logger.info("gli ordini validi hanno un importo totale di %s euro", sum(v['importo'] for v in validi))
-    scrivi_json(scartati, Path("data")  /Path("output") / "scartati.json" )
-    
+    scrivi_json(validi, OUTPUT_DIR / "validi.json")
+    totale = sum(v["importo"] for v in validi)
+    logger.info("gli ordini validi hanno un importo totale di %s euro", totale)
+    scrivi_json(scartati, Path("data") / Path("output") / "scartati.json")
 
 
 if __name__ == "__main__":

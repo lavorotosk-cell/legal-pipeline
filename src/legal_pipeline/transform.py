@@ -6,11 +6,13 @@ def classifica(importo: float) -> str:
     else:
         return "bassa"
 
+
 def converti_importo(valore: str) -> float | None:
     try:
         return float(valore)
     except ValueError:
         return None
+
 
 def elabora_ordini(ordini: list[dict]) -> tuple[list[dict], list[dict]]:
     ordini_validi: list[dict] = []
@@ -22,9 +24,9 @@ def elabora_ordini(ordini: list[dict]) -> tuple[list[dict], list[dict]]:
             if importo is None:
                 ordini_scartati.append(ordine)
                 continue
-            ordine["importo"] = importo 
+            ordine["importo"] = importo
             ordine["fascia"] = classifica(importo)
             ordini_validi.append(ordine)
         except KeyError:
             ordini_scartati.append(ordine)
-    return ordini_validi,ordini_scartati
+    return ordini_validi, ordini_scartati
