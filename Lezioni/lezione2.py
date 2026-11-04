@@ -54,5 +54,3 @@ print(f"Numero ordini scartati: {len(scartati)}")
 print(f"Totale importi validi: {sum(o['importo'] for o in validi):.2f}")
 
 
-
-#Per chi viene da PL/SQL: aggiungi all’esercizio 3 un try/except che gestisce un ordine senza la chiave importo (usa ordine["importo"] e cattura KeyError, mettendo l’ordine tra gli scartati). Aggiungi un quinto ordine {"id": 5, "cliente": "Gialli"} per provarlo.

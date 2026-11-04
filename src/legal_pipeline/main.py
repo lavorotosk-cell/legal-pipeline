@@ -2,7 +2,7 @@ import logging
 from pathlib import Path
 
 from legal_pipeline.files import leggi_ordini, scrivi_json
-from legal_pipeline.transform import elabora_ordini
+#from legal_pipeline.transform import elabora_ordini
 
 logger = logging.getLogger(__name__)
 
